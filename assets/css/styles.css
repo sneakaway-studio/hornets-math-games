@@ -1,0 +1,41 @@
+
+
+
+.white { color: #fff; }
+.white-bg { background-color: #fff; }
+.hornets-teal { color: #00788D; }
+.hornets-teal-bg { background-color: #00788D; }
+.hornets-purple { color: #1C1060; }
+.hornets-purple-bg { background-color: #1C1060; }
+
+
+a, a:link, a:visited, a:active, a:hover {
+    color: #00788D; 
+}
+footer a {
+    text-decoration: none !important;
+}
+
+/* FRONT PAGE */
+
+.front-menu a, .front-menu a:link, .front-menu a:visited, 
+.front-menu a:active, .front-menu a:hover {
+    color: #fff !important; 
+    text-decoration: none !important;
+    display: block;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.front-menu-box {
+    border-radius: 25px;
+    background-color: rgba(0,0,0,.1);
+    border: 2px solid #0B869C;
+}
+.front-menu-box:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid #21C1DD;
+}
+
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.08); }
