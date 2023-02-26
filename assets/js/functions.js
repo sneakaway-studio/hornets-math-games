@@ -33,7 +33,7 @@ function getNodes(_nodes) {
   let nodes = {};
 	for (const node in _nodes) {
 		nodes[node] = document.querySelector(`#${node.toString()}`);
-		// console.log(`${node}: ${nodes[node]}`);
+		console.log(`${node}: ${nodes[node]}`);
 	}
   return nodes;
 }

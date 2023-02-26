@@ -15,6 +15,7 @@ let nodes = {
 	playerPct: {},
 	shootBtn: {},
 	resetBtn: {},
+	progressText: {},
 	shotCount: {},
 	shotPct: {},
 	madeStreak: {},
@@ -74,20 +75,22 @@ async function shoot(e) {
 
 	let progressText = "The ball is up...";
 	const success = Math.random() < shotSummary.playerPct / 100;
+    nodes.progressText.innerHTML = progressText;
 	console.log(progressText, success);
 
 	shotHistory.push(success);
 	saveLocalStorage("shotHistory", shotHistory);
-	updateStatsFromHistory();
 
-	// await sleep(
-	// 	1000,
-	// 	() => {
-	// 		// console.log("1 second has passed", new Date());
-	// 		shootingText.text(success ? `It's good!` : "No good!");
-	// 	},
-	// 	[]
-	// );
+
+	await sleep(
+		1000,
+		() => {
+			// console.log("1 second has passed", new Date());
+			nodes.progressText.innerHTML = success ? `It's good!` : "No good!";
+            updateStatsFromHistory();
+		},
+		[]
+	);
 }
 
 function updateStatsFromHistory() {
@@ -116,6 +119,7 @@ function reset() {
 	saveLocalStorage("shotHistory", shotHistory);
 	shotSummary = Object.assign({}, shotSummaryStart);
 	saveLocalStorage("shotSummary", shotSummary);
+    nodes.progressText.innerHTML = "";
 	updatePlayer();
 	updateTable();
 	updateShotResultsTable();

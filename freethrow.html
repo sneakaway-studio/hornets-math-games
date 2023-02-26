@@ -42,7 +42,7 @@
 		</div>
 
 		<div class="container-fluid bg-white">
-			<div class="container">
+			<div class="container py-md-3 pb-md-4">
 				<div class="row">
 					<div class="col-12 col-lg-4 order-3 order-lg-1 my-3">
 
@@ -52,7 +52,7 @@
 							<li>Look up the player's season free throw percentage and input that value below.</li>
 							<li>Now, click the "Shoot your shot!" button and take the same number of free throws as that player has taken in tonight's game. </li>
 							<li>Do you make more, less or the same?</li>
-							<li>Overtime Question - Try this several times. Do you tend to do better, the same or worse than how the player is playing tonight?</li>
+							<li><b>Overtime Question</b> - Try this several times. Do you tend to do better, the same or worse than how the player is playing tonight?</li>
 						</ol>
 
 						<details>
@@ -85,6 +85,7 @@
 								<button class="btn btn-hornets btn-lg" id="shootBtn">
 									Shoot your shot!
 								</button>
+								<!-- <h5 id="progressText" class="my-3"></h5> -->
 							</div>
 						</div>
 						
@@ -94,11 +95,12 @@
 
 						<h4>Shot history</h4>
 
-						<div class="my-3">
-							<p id="progressText"></p>
+						<div>
+							<div id="shotResults" class="my-3"></div>
+							<h5 id="progressText" class="my-3"></h5>
 						</div>
 			
-						<div id="shotResults" class="my-3"></div>
+						
 
 						<div class="table-responsive">
 
