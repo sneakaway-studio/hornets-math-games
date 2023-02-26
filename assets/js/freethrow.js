@@ -7,6 +7,7 @@ let shotSummaryStart = {
 	playerPct: 50,
 	shotCount: 0,
 	shotPct: 0,
+    shotMadeCount: 0,
 	madeStreak: 0,
 	missedStreak: 0,
 };
@@ -54,7 +55,7 @@ function updatePlayer() {
 	nodes.playerPct.value = shotSummary.playerPct || 50;
 }
 function updateTable() {
-	nodes.shotCount.innerHTML = shotSummary.shotCount;
+	nodes.shotCount.innerHTML = shotSummary.shotMadeCount + " / " + shotSummary.shotCount;
 	nodes.shotPct.innerHTML = Math.ceil(shotSummary.shotPct) + "%";
 	nodes.madeStreak.innerHTML = shotSummary.madeStreak;
 	nodes.missedStreak.innerHTML = shotSummary.missedStreak;
@@ -99,6 +100,7 @@ function updateStatsFromHistory() {
 		"shotPct",
 		(shotHistory.filter((d) => d).length / shotHistory.length) * 100
 	);
+    set("shotMadeCount", shotHistory.filter(Boolean).length)
 	set("madeStreak", streak(shotHistory, true));
 	set("missedStreak", streak(shotHistory, false));
 
