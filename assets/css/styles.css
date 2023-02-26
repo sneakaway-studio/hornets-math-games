@@ -39,3 +39,66 @@ footer a {
 
 .grow { transition: all .2s ease-in-out; }
 .grow:hover { transform: scale(1.08); }
+
+
+
+
+/* https://blog.koalite.com/bbg/ */
+.btn-hornets {
+    color: #ffffff;
+    background-color: #00788D;
+    border-color: #026F82;
+}
+.btn-hornets:hover,
+.btn-hornets:focus,
+.btn-hornets:active,
+.btn-hornets.active,
+.open .dropdown-toggle.btn-hornets {
+    color: #ffffff;
+    background-color: #046070;
+    border-color: #026F82;
+}
+.btn-hornets:active,
+.btn-hornets.active,
+.open .dropdown-toggle.btn-hornets {
+    background-image: none;
+}
+.btn-hornets.disabled,
+.btn-hornets[disabled],
+fieldset[disabled] .btn-hornets,
+.btn-hornets.disabled:hover,
+.btn-hornets[disabled]:hover,
+fieldset[disabled] .btn-hornets:hover,
+.btn-hornets.disabled:focus,
+.btn-hornets[disabled]:focus,
+fieldset[disabled] .btn-hornets:focus,
+.btn-hornets.disabled:active,
+.btn-hornets[disabled]:active,
+fieldset[disabled] .btn-hornets:active,
+.btn-hornets.disabled.active,
+.btn-hornets[disabled].active,
+fieldset[disabled] .btn-hornets.active {
+    background-color: #00788D;
+    border-color: #026F82;
+}
+.btn-hornets .badge {
+    color: #00788D;
+    background-color: #ffffff;
+}
+
+
+
+
+
+/* FREE THROW */
+
+table#shotResults {
+    width: 100%;
+}
+table#shotResults tr {
+    width: 100%;
+    height: 20px;
+}
+
+
+.page-title-img { max-height: 30px !important; }
