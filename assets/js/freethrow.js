@@ -27,9 +27,9 @@ nodes = getNodes(nodes);
 
 function init() {
 	// get values from localStorage
-	shotHistory = getStorageValue("shotHistory") || [];
+	shotHistory = storage.getItem("shotHistory") || [];
 	shotSummary =
-		getStorageValue("shotSummary") || Object.assign({}, shotSummaryStart);
+		storage.getItem("shotSummary") || Object.assign({}, shotSummaryStart);
 	// console.log("shotHistory", shotHistory);
 	// console.log("shotSummary", shotSummary);
 	updatePlayer();
@@ -39,10 +39,10 @@ init();
 
 // INPUTS
 nodes.playerName.addEventListener("change", (e) => {
-	set("playerName", e.target.value);
+	setStore("playerName", e.target.value);
 });
 nodes.playerPct.addEventListener("change", (e) => {
-	set("playerPct", e.target.value);
+	setStore("playerPct", e.target.value);
 });
 
 // BUTTONS
@@ -59,15 +59,15 @@ function updateTable() {
 	nodes.shotPct.innerHTML = Math.ceil(shotSummary.shotPct) + "%";
 	nodes.madeStreak.innerHTML = shotSummary.madeStreak;
 	nodes.missedStreak.innerHTML = shotSummary.missedStreak;
-	updateShotResultsTable();
+	updateShotResults();
 }
 
 /**
- *  Set local value in obj, save in storage
+ *  Set value in global obj, save in storage
  */
-function set(key, value) {
+function setStore(key, value) {
 	shotSummary[key] = value;
-	saveLocalStorage("shotSummary", shotSummary);
+	storage.setItem("shotSummary", shotSummary);
 }
 
 async function shoot(e) {
@@ -80,8 +80,7 @@ async function shoot(e) {
 	console.log(progressText, success);
 
 	shotHistory.push(success);
-	saveLocalStorage("shotHistory", shotHistory);
-
+	storage.setItem("shotHistory", shotHistory);
 
 	await sleep(
 		1000,
@@ -95,39 +94,30 @@ async function shoot(e) {
 }
 
 function updateStatsFromHistory() {
-	set("shotCount", shotHistory.length);
-	set(
+	setStore("shotCount", shotHistory.length);
+	setStore(
 		"shotPct",
 		(shotHistory.filter((d) => d).length / shotHistory.length) * 100
 	);
-    set("shotMadeCount", shotHistory.filter(Boolean).length)
-	set("madeStreak", streak(shotHistory, true));
-	set("missedStreak", streak(shotHistory, false));
+    setStore("shotMadeCount", shotHistory.filter(Boolean).length)
+	setStore("madeStreak", streak(shotHistory, true));
+	setStore("missedStreak", streak(shotHistory, false));
 
 	updateTable();
 }
-
-const streak = (a, value) =>
-	a.reduce(
-		({ count, max }, item) =>
-			item === value
-				? { count: ++count, max: Math.max(count, max) }
-				: { count: 0, max: max },
-		{ count: 0, max: 0 }
-	).max;
 
 function reset() {
 	shotHistory = [];
-	saveLocalStorage("shotHistory", shotHistory);
+	storage.setItem("shotHistory", shotHistory);
 	shotSummary = Object.assign({}, shotSummaryStart);
-	saveLocalStorage("shotSummary", shotSummary);
+	storage.setItem("shotSummary", shotSummary);
     nodes.progressText.innerHTML = "";
 	updatePlayer();
 	updateTable();
-	updateShotResultsTable();
+	updateShotResults();
 }
 
-function updateShotResultsTable() {
+function updateShotResults() {
 	let str = "";
 	for (let i = 0; i < shotHistory.length; i++) {
 		str += `<span title='${i}' class='${
