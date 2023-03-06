@@ -30,7 +30,7 @@ function createControls() {
   const pointEnter = d3.select("#pointTypeButtons").selectAll(".form-check")
       .data(pointTypes)
     .enter().append("div")
-      .attr("class", "form-check pl-4 mb-1")
+      .attr("class", "form-check pl-4 mb-1  pointTypeRadioWrapper")
       .style("background-color", d => {
         const c = d3.color(eventColor(d));
         c.opacity = 0.75;
@@ -57,7 +57,7 @@ function createControls() {
   const shotEnter = d3.select("#shotTypeButtons").selectAll(".form-check")
       .data(shotTypes)
     .enter().append("div")
-      .attr("class", "form-check")
+      .attr("class", "form-check shotTypeRadioWrapper")
       .on("click", d => shotType = d);
 
   shotEnter.append("input")
@@ -173,7 +173,25 @@ function createClickMap() {
         .style("fill", d => eventColor(d.pointType));
 
   });
+
+    // Handle resizing svg div
+    const resizeObserver = new ResizeObserver(entries => {
+      // Get the width and height
+      const width = parseInt(svg.style("width"), 10);
+      const height = parseInt(svg.style("height"), 10);
+  
+      d3.select("#clickMap").selectAll(".event").each(function (d) {
+        d.x = d.xNorm * width;
+        d.y = d.yNorm * height;
+  
+        d3.select(this).attr("transform", d => "translate(" + d.x + "," + d.y + ")")
+      });
+    });
+  
+    resizeObserver.observe(document.querySelector(".svgDiv"));
 }
+
+
 
 function getShape(shotType) {
   return d3.symbol()

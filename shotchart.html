@@ -53,6 +53,10 @@
       pointer-events: all;
     }
 
+
+	.pointTypeRadioWrapper { display: inline-block;}
+	.shotTypeRadioWrapper { display: inline-block;}
+
 		</style>
 	</head>
 	<body class="hornets-purple-bg">
@@ -83,113 +87,113 @@
 			</div>
 		</div>
 
-		<div class="container-fluid bg-white">
-			<div class="container py-md-3 pb-md-4">
+		<div class="container-fluid bg-white py-md-3 pb-md-4">
 
-				<div class="row">
-					<div class="col-2">
-
-						<div class="form-group">
-							<label for="pointTypeButtons">Points</label>
-							<div id="pointTypeButtons"></div>
-						</div>
-						<div class="form-group">
-							<label for="shotTypeButtons">Shot Type</label>
-							<div id="shotTypeButtons"></div>
-					
-							<button id="clearButton" class="btn btn-primary">Clear All</button>
-						</div>
-
+			<div class="row">
+				<div class="col-4">
+					<div class="form-group">
+						<label for="pointTypeButtons">Points</label>
+						<div id="pointTypeButtons"></div>
 					</div>
-		
-
-					<div class="col-10">
-
-
-						<div id="clickMap">
-							<div class="text-center">Can't see the whole court? Reduce the width of the browser window.</div>
-							<img src="./assets/img/halfcourt.png" width="80%" alt='basketball court' class="image" draggable="false" style="opacity:0.8;filter:alpha(opacity=80);"/>		  
-							<div class="svgDiv">
-							  <svg width="100%" height="100%">
-								<rect class="background" width="100%" height="100%" />
-							  </svg>
-							</div>
-						  </div>
-
-
+				</div>
+				<div class="col-6">
+					<div class="form-group">
+						<label for="shotTypeButtons">Shot Type</label>
+						<div id="shotTypeButtons"></div>				
 					</div>
-
-					<!-- <div class="col-12 col-lg-4 order-3 order-lg-1 my-3">
-
-						<h4>Instructions</h4>
-						
-						<p>Look for a t-shirt toss during a time-out. Keep track of the total number of t-shirts tossed. To aid in your counting, tap the button to the right. Once the t-shirt toss is over, here are a few questions for you!</p>
-
-						<h4>Questions</h4>
-						
-						<ol>
-							<li>How many shirts were tossed?</li>
-							<li>How many t-shirt toss events would be needed to fling 1,000 shirts? Click here to visualize this!</li>
-							<li><b>Overtime Question</b>: Look up the attendance of the game. How many t-shirt tosses would be needed to toss as many shirts as there are fans at the game?</li>	
-						</ol>
-
-
-					</div>
-
-
-					<div class="col-12 col-md-6 col-lg-4 order-1 order-lg-3 my-3">
-
-						<button class="btn btn-hornets btn-lg" id="tossBtn">
-							Toss the t-shirt!
-						</button>
-
-						<div class="row my-3">
-							<div class="col-3">
-								<input type="text" class="text-center form-control form-control-lg" id="tossCountLg" value="0">
-							</div>
-							<div class="col-9 g-0">
-								<div class="fs-3">T-Shirts Tossed</div>
-							</div>
-						</div>
-
-						<details>
-							<summary>Solution</summary>
-						 
-								
-										
-							<div class="table-responsive">
-
-								<table class="table table-bordered">
-									<tbody>
-
-										<tr>
-											<td>T-shirt events required to fling 1000 shirts</td>
-											<td id="tossEventsEstimate1000" class="text-end">0</td>
-										</tr>
-										<tr>
-											<td>T-shirt events required for current attendance 
-												<input type="number" style="display:inline-block" class="form-control w-50" id="gameAttendance" value="0" aria-label="Game attendance">
-											</td>
-											<td id="tossEventsEstimateAttendance" class="text-end">0</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-
-							<ul>
-								<li>These are answers and explanations to the prompts above</li>
-								<li>visible only once they click the drop down arrow</li>
-							</ul>
-						</details>
-
-						<button class="btn btn-secondary mt-3" id="resetBtn">
-							Reset history
-						</button>
-				
-					</div> -->
+				</div>
+				<div class="col-2">
+					<button id="clearButton" class="btn btn-primary">Clear All</button>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-12">
+
+					<!-- <div class="text-center">Can't see the whole court? Reduce the width of the browser window.</div> -->
+
+					<div id="clickMap">
+						<img src="./assets/img/halfcourt.png" width="80%" alt='basketball court' class="image" draggable="false" style="opacity:0.8;filter:alpha(opacity=80);"/>		  
+						<div class="svgDiv">
+							<svg width="100%" height="100%">
+							<rect class="background" width="100%" height="100%" />
+							</svg>
+						</div>
+						</div>
+
+
+				</div>
+
+				<!-- <div class="col-12 col-lg-4 order-3 order-lg-1 my-3">
+
+					<h4>Instructions</h4>
+					
+					<p>Look for a t-shirt toss during a time-out. Keep track of the total number of t-shirts tossed. To aid in your counting, tap the button to the right. Once the t-shirt toss is over, here are a few questions for you!</p>
+
+					<h4>Questions</h4>
+					
+					<ol>
+						<li>How many shirts were tossed?</li>
+						<li>How many t-shirt toss events would be needed to fling 1,000 shirts? Click here to visualize this!</li>
+						<li><b>Overtime Question</b>: Look up the attendance of the game. How many t-shirt tosses would be needed to toss as many shirts as there are fans at the game?</li>	
+					</ol>
+
+
+				</div>
+
+
+				<div class="col-12 col-md-6 col-lg-4 order-1 order-lg-3 my-3">
+
+					<button class="btn btn-hornets btn-lg" id="tossBtn">
+						Toss the t-shirt!
+					</button>
+
+					<div class="row my-3">
+						<div class="col-3">
+							<input type="text" class="text-center form-control form-control-lg" id="tossCountLg" value="0">
+						</div>
+						<div class="col-9 g-0">
+							<div class="fs-3">T-Shirts Tossed</div>
+						</div>
+					</div>
+
+					<details>
+						<summary>Solution</summary>
+						
+							
+									
+						<div class="table-responsive">
+
+							<table class="table table-bordered">
+								<tbody>
+
+									<tr>
+										<td>T-shirt events required to fling 1000 shirts</td>
+										<td id="tossEventsEstimate1000" class="text-end">0</td>
+									</tr>
+									<tr>
+										<td>T-shirt events required for current attendance 
+											<input type="number" style="display:inline-block" class="form-control w-50" id="gameAttendance" value="0" aria-label="Game attendance">
+										</td>
+										<td id="tossEventsEstimateAttendance" class="text-end">0</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<ul>
+							<li>These are answers and explanations to the prompts above</li>
+							<li>visible only once they click the drop down arrow</li>
+						</ul>
+					</details>
+
+					<button class="btn btn-secondary mt-3" id="resetBtn">
+						Reset history
+					</button>
+			
+				</div> -->
+			</div>
 		</div>
+
 
 		<footer class="container-fluid hornets-purple-bg white">
 			<div class="container py-5">
