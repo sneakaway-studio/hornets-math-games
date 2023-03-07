@@ -4,59 +4,63 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Shot Tracker - Math Buzz - Charlotte Hornets & Museum of Math</title>
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-			crossorigin="anonymous"
-		/>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
 		<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css'>
 		<link rel="stylesheet" href="assets/css/styles.css" />
 		<script src="https://d3js.org/d3.v4.min.js"></script>
 		<style>
-   body, html {
-      height: 100%;
-      overflow-y: hidden;
-    }
+			body,
+			html {
+				height: 100%;
+				overflow-y: hidden;
+			}
 
-    #clickMap {
-      position: relative;
-      margin-left: 10%;
-      width: 80%;
-    }
+			#clickMap {
+				position: relative;
+				margin-left: 10%;
+				width: 80%;
+			}
 
-    .image {
-      width: 100%;
-      height: auto;
-      -webkit-user-select: none;  /* Chrome all / Safari all */
-      -moz-user-select: none;     /* Firefox all */
-      -ms-user-select: none;      /* IE 10+ */
-      user-select: none;          /* Likely future */
-    }
+			.image {
+				width: 100%;
+				height: auto;
+				-webkit-user-select: none;
+				/* Chrome all / Safari all */
+				-moz-user-select: none;
+				/* Firefox all */
+				-ms-user-select: none;
+				/* IE 10+ */
+				user-select: none;
+				/* Likely future */
+			}
 
-    .svgDiv {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-    }
+			.svgDiv {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+			}
 
-    .event {
-      fill-opacity: 0.75;
-      stroke: black;
-      stroke-opacity: 0.75;
-    }
+			.event {
+				fill-opacity: 0.75;
+				stroke: black;
+				stroke-opacity: 0.75;
+			}
 
-    .background {
-      visibility: hidden;
-      pointer-events: all;
-    }
+			.background {
+				visibility: hidden;
+				pointer-events: all;
+			}
 
 
-	.pointTypeRadioWrapper { display: inline-block;}
-	.shotTypeRadioWrapper { display: inline-block;}
+			.pointTypeRadioWrapper {
+				display: inline-block;
+			}
 
+			.shotTypeRadioWrapper {
+				display: inline-block;
+			}
 		</style>
 	</head>
 	<body class="hornets-purple-bg">
@@ -90,6 +94,77 @@
 		<div class="container-fluid bg-white py-md-3 pb-md-4">
 
 			<div class="row">
+
+
+
+
+
+				<div class="btn-toolbar mb-3 justify-content-center align-items-center" role="toolbar" aria-label="Toolbar with button groups">
+
+					<div class="btn-group m-1" role="group" aria-label="Add or Remove">
+						<button class="btn btn-hornets" id="modeBtn">Add</button>
+					</div>
+
+
+					<span class="shotTrackerInfo">Period</span>
+
+					<div class="btn-group m-1" role="group" aria-label="Period (radio toggle button group)">
+
+						<input type="radio" class="btn-check" name="periodBtn" id="periodBtn1" autocomplete="off" checked>
+						<label class="btn btn-outline-hornets" for="periodBtn1">1</label>
+
+						<input type="radio" class="btn-check" name="periodBtn" id="periodBtn2" autocomplete="off">
+						<label class="btn btn-outline-hornets" for="periodBtn2">2</label>
+
+						<input type="radio" class="btn-check" name="periodBtn" id="periodBtn3" autocomplete="off">
+						<label class="btn btn-outline-hornets" for="periodBtn3">3</label>
+
+						<input type="radio" class="btn-check" name="periodBtn" id="periodBtn4" autocomplete="off">
+						<label class="btn btn-outline-hornets" for="periodBtn4">4</label>
+					</div>
+
+					<span class="shotTrackerInfo">Points</span>
+
+					<div class="btn-group m-1" role="group" aria-label="Points (radio toggle button group)">
+
+						<input type="radio" class="btn-check" name="pointsBtn" id="pointsBtn0" autocomplete="off">
+						<label class="btn btn-outline-hornets" for="pointsBtn0">0</label>
+
+						<input type="radio" class="btn-check" name="pointsBtn" id="pointsBtn1" autocomplete="off">
+						<label class="btn btn-outline-hornets" for="pointsBtn1">1</label>
+
+						<input type="radio" class="btn-check" name="pointsBtn" id="pointsBtn2" autocomplete="off" checked>
+						<label class="btn btn-outline-hornets" for="pointsBtn2">2</label>
+
+						<input type="radio" class="btn-check" name="pointsBtn" id="pointsBtn3" autocomplete="off">
+						<label class="btn btn-outline-hornets" for="pointsBtn3">3</label>
+					</div>
+
+					<span class="shotTrackerInfo">Accuracy</span>
+
+					<div class="btn-group m-1" role="group" aria-label="Accuracy">
+						<input type="radio" class="btn-check" name="accuracyBtn" id="hitBtn" autocomplete="off" checked>
+						<label class="btn btn-outline-hornets" for="hitBtn">Hit</label>
+
+						<input type="radio" class="btn-check" name="accuracyBtn" id="missBtn" autocomplete="off">
+						<label class="btn btn-outline-hornets" for="missBtn">Miss</label>
+					</div>
+
+					<div class="btn-group m-1" role="group" aria-label="Type">
+						<select class="form-select" aria-label="Default select example">
+							<option selected>Shot type</option>
+							<option value="1">layup / dunk</option>
+							<option value="2">dribble-jumper</option>
+							<option value="3">catch & shoot</option>
+							<option value="3">runner / floater</option>
+							<option value="3">post move</option>
+						</select>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row">
 				<div class="col-4">
 					<div class="form-group">
 						<label for="pointTypeButtons">Points</label>
@@ -99,7 +174,7 @@
 				<div class="col-6">
 					<div class="form-group">
 						<label for="shotTypeButtons">Shot Type</label>
-						<div id="shotTypeButtons"></div>				
+						<div id="shotTypeButtons"></div>
 					</div>
 				</div>
 				<div class="col-2">
@@ -112,13 +187,13 @@
 					<!-- <div class="text-center">Can't see the whole court? Reduce the width of the browser window.</div> -->
 
 					<div id="clickMap">
-						<img src="./assets/img/halfcourt.png" width="80%" alt='basketball court' class="image" draggable="false" style="opacity:0.8;filter:alpha(opacity=80);"/>		  
+						<img src="./assets/img/halfcourt.png" width="80%" alt='basketball court' class="image" draggable="false" style="opacity:0.8;filter:alpha(opacity=80);" />
 						<div class="svgDiv">
 							<svg width="100%" height="100%">
-							<rect class="background" width="100%" height="100%" />
+								<rect class="background" width="100%" height="100%" />
 							</svg>
 						</div>
-						</div>
+					</div>
 
 
 				</div>
@@ -200,42 +275,30 @@
 				<div class="row fs-5 text-center text-md-start">
 					<div class="col-12 col-md-3 d-flex align-items-top justify-content-center">
 						<div>
-                            <p>Math Games</p>
-                            <a href="./shotchart.html">NBA Analyst</a><br />
-                            <a href="./freethrow.html">Free Throw Shooter</a><br />
-                            <a href="./tshirt.html">T-Shirt Toss</a>
+							<p>Math Games</p>
+							<a href="./shotchart.html">NBA Analyst</a><br />
+							<a href="./freethrow.html">Free Throw Shooter</a><br />
+							<a href="./tshirt.html">T-Shirt Toss</a>
 
 							<p class="mt-5">
 								<a href="credits.html">Credits</a>
 							</p>
-                        </div>
+						</div>
 					</div>
 					<div class="col-12 col-md-6 d-flex align-items-top justify-content-center mt-4 mt-md-0">
 						<div>
-                            Brought to you by<br>
-						<a href="https://momath.org/"><img
-							src="assets/img/logo-momath-horiz.png"
-							alt="Museum of Math logo"
-							class="img-fluid "
-						/></a>
-                        </div>
+							Brought to you by<br>
+							<a href="https://momath.org/"><img src="assets/img/logo-momath-horiz.png" alt="Museum of Math logo" class="img-fluid " /></a>
+						</div>
 					</div>
 					<div class="col-12 col-md-3 d-flex align-items-top justify-content-center mt-4 mt-md-0">
-						<a href="https://www.nba.com/hornets"><img
-							src="assets/img/logo-hornets-sq.png"
-							alt="Charlotte Hornets logo"
-							class="img-fluid"
-						/></a>
+						<a href="https://www.nba.com/hornets"><img src="assets/img/logo-hornets-sq.png" alt="Charlotte Hornets logo" class="img-fluid" /></a>
 					</div>
 				</div>
 			</div>
 		</footer>
 
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-			crossorigin="anonymous"
-		></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 		<script src="assets/js/functions.js"></script>
 		<script src="assets/js/shotchart.js"></script>

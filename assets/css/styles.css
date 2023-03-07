@@ -1,26 +1,60 @@
+:root {
+    --white: #fff;
 
-
-
-.white { color: #fff; }
-.white-bg { background-color: #fff; }
-.hornets-teal { color: #00788D; }
-.hornets-teal-bg { background-color: #00788D; }
-.hornets-purple { color: #1C1060; }
-.hornets-purple-bg { background-color: #1C1060; }
-
-
-a, a:link, a:visited, a:active, a:hover {
-    color: #00788D; 
+    /* Color styles: "Export styles to CSS variables" */
+    --hornets-purple: #1C1060;
+    --hornets-teal-dk2: #006071;
+    --hornets-teal-dk1: #006C7F;
+    --hornets-teal: #00788D;
+    --hornets-teal-lt1: #1A8598;
+    --hornets-teal-lt2: #3393A4;
 }
+
+.white {
+    color: var(--white);
+}
+
+.white-bg {
+    background-color: var(--white);
+}
+
+.hornets-teal {
+    background-color: var(--hornets-teal);
+}
+
+.hornets-teal-bg {
+    background-color: var(--hornets-teal);
+}
+
+.hornets-purple {
+    color: var(--hornets-purple);
+}
+
+.hornets-purple-bg {
+    background-color: var(--hornets-purple);
+}
+
+
+a,
+a:link,
+a:visited,
+a:active,
+a:hover {
+    color: var(--hornets-teal);
+}
+
 footer a {
     text-decoration: none !important;
 }
 
 /* FRONT PAGE */
 
-.front-menu a, .front-menu a:link, .front-menu a:visited, 
-.front-menu a:active, .front-menu a:hover {
-    color: #fff !important; 
+.front-menu a,
+.front-menu a:link,
+.front-menu a:visited,
+.front-menu a:active,
+.front-menu a:hover {
+    color: #fff !important;
     text-decoration: none !important;
     display: block;
     padding: 1rem;
@@ -29,40 +63,53 @@ footer a {
 
 .front-menu-box {
     border-radius: 25px;
-    background-color: rgba(0,0,0,.1);
+    background-color: rgba(0, 0, 0, .1);
     border: 2px solid #0B869C;
 }
+
 .front-menu-box:hover {
     background-color: rgba(255, 255, 255, 0.2);
     border: 2px solid #21C1DD;
 }
 
-.grow { transition: all .2s ease-in-out; }
-.grow:hover { transform: scale(1.08); }
+.grow {
+    transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.08);
+}
 
 
+.shotTrackerInfo {
+    margin-left: 1rem;
+}
 
 
 /* https://blog.koalite.com/bbg/ */
+/* 
 .btn-hornets {
     color: #ffffff;
     background-color: #00788D;
-    border-color: #026F82;
+    border-color: #006C7F;
 }
+
 .btn-hornets:hover,
 .btn-hornets:focus,
 .btn-hornets:active,
 .btn-hornets.active,
 .open .dropdown-toggle.btn-hornets {
     color: #ffffff;
-    background-color: #046070;
-    border-color: #026F82;
+    background-color: #006071;
+    border-color: #006C7F;
 }
+
 .btn-hornets:active,
 .btn-hornets.active,
 .open .dropdown-toggle.btn-hornets {
     background-image: none;
 }
+
 .btn-hornets.disabled,
 .btn-hornets[disabled],
 fieldset[disabled] .btn-hornets,
@@ -79,11 +126,48 @@ fieldset[disabled] .btn-hornets:active,
 .btn-hornets[disabled].active,
 fieldset[disabled] .btn-hornets.active {
     background-color: #00788D;
-    border-color: #026F82;
+    border-color: #006C7F;
 }
+
 .btn-hornets .badge {
     color: #00788D;
     background-color: #ffffff;
+} */
+
+.btn-hornets {
+    /* color */
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-active-color: var(--bs-white);
+    --bs-btn-hover-color: var(--bs-white);
+    /* bg */
+    --bs-btn-bg: var(--hornets-teal);
+    --bs-btn-hover-bg: var(--hornets-teal-dk2);
+    --bs-btn-active-bg: var(--hornets-teal-dk2);
+    /* border */
+    --bs-btn-border-color: var(--hornets-teal-dk1);
+    --bs-btn-hover-border-color: var(--hornets-teal-dk1);
+    --bs-btn-active-border-color: var(--hornets-teal-dk1);
+    /* shadow */
+    --bs-btn-focus-shadow-rgb: var(--hornets-teal);
+}
+
+.btn-outline-hornets {
+    /* color */
+    --bs-btn-color: var(--hornets-teal);
+    --bs-btn-hover-color: var(--hornets-teal);
+    --bs-btn-active-color: var(--bs-white);
+    --bs-btn-hover-color: var(--bs-white);
+    /* bg */
+    --bs-btn-bg: var(--bs-white);
+    --bs-btn-hover-bg: var(--hornets-teal);
+    --bs-btn-active-bg: var(--hornets-teal);
+    /* border */
+    --bs-btn-border-color: var(--hornets-teal);
+    --bs-btn-hover-border-color: var(--hornets-teal);
+    --bs-btn-active-border-color: var(--hornets-teal);
+    /* shadow */
+    --bs-btn-focus-shadow-rgb: var(--hornets-teal);
 }
 
 
@@ -95,10 +179,13 @@ fieldset[disabled] .btn-hornets.active {
 table#shotResults {
     width: 100%;
 }
+
 table#shotResults tr {
     width: 100%;
     height: 20px;
 }
 
 
-.page-title-img { max-height: 30px !important; }
+.page-title-img {
+    max-height: 30px !important;
+}
