@@ -43,9 +43,15 @@ a:hover {
     color: var(--hornets-teal);
 }
 
+.page-title-img {
+    max-height: 30px !important;
+}
+
 footer a {
     text-decoration: none !important;
 }
+
+
 
 /* FRONT PAGE */
 
@@ -81,9 +87,7 @@ footer a {
 }
 
 
-.shotTrackerInfo {
-    margin-left: 1rem;
-}
+
 
 
 /* https://blog.koalite.com/bbg/ */
@@ -134,6 +138,12 @@ fieldset[disabled] .btn-hornets.active {
     background-color: #ffffff;
 } */
 
+
+
+
+
+
+
 .btn-hornets {
     /* color */
     --bs-btn-color: var(--bs-white);
@@ -174,6 +184,8 @@ fieldset[disabled] .btn-hornets.active {
 
 
 
+
+
 /* FREE THROW */
 
 table#shotResults {
@@ -186,6 +198,30 @@ table#shotResults tr {
 }
 
 
-.page-title-img {
-    max-height: 30px !important;
+/* SHOT TRACKER */
+
+.shotTrackerInfo {
+    margin-left: 1rem;
+}
+
+.shot-menu-group svg {
+    max-width: 1rem;
+    max-height: 1rem;
+    margin: .1rem;
+}
+
+.shot-menu path,
+.shot-menu circle,
+.shot-menu rect {
+    fill: var(--hornets-teal);
+}
+
+.shot-menu-toggle path,
+.shot-menu-toggle circle,
+.shot-menu-toggle rect {
+    fill: var(--bs-white);
+}
+
+.removeGroup {
+    display: none;
 }
