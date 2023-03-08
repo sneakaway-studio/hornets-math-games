@@ -150,6 +150,7 @@ function createClickMap() {
 		};
 
 		shotsPlaced.push(data);
+        storage.setItem("shotsPlaced", shotsPlaced);
 		console.log(shotsPlaced);
 
 		// Draw the event

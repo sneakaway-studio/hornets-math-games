@@ -11,8 +11,8 @@
         <style>
             body,
             html {
+                width:100%;
                 height: 100%;
-                overflow-y: hidden;
             }
 
 
@@ -28,13 +28,12 @@
                 pointer-events: all;
             }
 
-
-            .pointTypeRadioWrapper {
-                display: inline-block;
-            }
-
-            .shotTypeRadioWrapper {
-                display: inline-block;
+            .toolbar {
+                position: relative;
+                top: 0;
+                left: 0;
+                z-index: 10;
+                background-color: rgba(255, 255, 255, 1);
             }
         </style>
     </head>
@@ -66,15 +65,7 @@
             </div>
         </div>
 
-        <style>
-            .toolbar {
-                position: relative;
-                top: 0;
-                left: 0;
-                z-index: 10;
-                background-color: rgba(255, 255, 255, 1);
-            }
-        </style>
+
 
         <div class="container-fluid py-md-2 toolbar">
             <div class="row">
