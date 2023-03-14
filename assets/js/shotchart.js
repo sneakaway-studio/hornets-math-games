@@ -1,5 +1,20 @@
 "use strict";
 
+// let toolbar = document.querySelector(".toolbar");
+
+// document.addEventListener("DOMContentLoaded", function () {
+// 	window.addEventListener("scroll", function () {
+// 		if (window.scrollY > 50) {
+// 			toolbar.classList.add("fixed-top");
+
+// 			toolbar.style.backgroundColor = "rgba(255,255,255,0.5)";
+// 		} else {
+// 			toolbar.classList.remove("fixed-top");
+// 			toolbar.style.backgroundColor = "rgba(255,255,255,1)";
+// 		}
+// 	});
+// });
+
 let mode = "Add";
 
 // PERIOD
@@ -150,7 +165,7 @@ function createClickMap() {
 		};
 
 		shotsPlaced.push(data);
-        storage.setItem("shotsPlaced", shotsPlaced);
+		storage.setItem("shotsPlaced", shotsPlaced);
 		console.log(shotsPlaced);
 
 		// Draw the event
