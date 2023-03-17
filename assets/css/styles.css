@@ -34,7 +34,6 @@
     background-color: var(--hornets-purple);
 }
 
-
 a,
 a:link,
 a:visited,
@@ -85,64 +84,6 @@ footer a {
 .grow:hover {
     transform: scale(1.08);
 }
-
-
-
-
-
-/* https://blog.koalite.com/bbg/ */
-/* 
-.btn-hornets {
-    color: #ffffff;
-    background-color: #00788D;
-    border-color: #006C7F;
-}
-
-.btn-hornets:hover,
-.btn-hornets:focus,
-.btn-hornets:active,
-.btn-hornets.active,
-.open .dropdown-toggle.btn-hornets {
-    color: #ffffff;
-    background-color: #006071;
-    border-color: #006C7F;
-}
-
-.btn-hornets:active,
-.btn-hornets.active,
-.open .dropdown-toggle.btn-hornets {
-    background-image: none;
-}
-
-.btn-hornets.disabled,
-.btn-hornets[disabled],
-fieldset[disabled] .btn-hornets,
-.btn-hornets.disabled:hover,
-.btn-hornets[disabled]:hover,
-fieldset[disabled] .btn-hornets:hover,
-.btn-hornets.disabled:focus,
-.btn-hornets[disabled]:focus,
-fieldset[disabled] .btn-hornets:focus,
-.btn-hornets.disabled:active,
-.btn-hornets[disabled]:active,
-fieldset[disabled] .btn-hornets:active,
-.btn-hornets.disabled.active,
-.btn-hornets[disabled].active,
-fieldset[disabled] .btn-hornets.active {
-    background-color: #00788D;
-    border-color: #006C7F;
-}
-
-.btn-hornets .badge {
-    color: #00788D;
-    background-color: #ffffff;
-} */
-
-
-
-
-
-
 
 .btn-hornets {
     /* color */
@@ -224,4 +165,30 @@ table#shotResults tr {
 
 .removeGroup {
     display: none;
+}
+
+#clickMap {
+    background-color: rgba(255, 0, 0, .5);
+    position: relative;
+    width: 100%;
+}
+
+#svgBgImage {
+    width: 100%;
+    height: auto;
+    user-select: none;
+}
+
+#svgDiv {
+    /* background-color: rgba(0,255,0,.5); */
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#svgDiv svg {
+    /* background-color: rgba(0,0,255,.5); */
+    min-height: 80%;
 }

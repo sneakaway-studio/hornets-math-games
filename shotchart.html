@@ -11,11 +11,9 @@
         <style>
             body,
             html {
-                width:100%;
+                width: 100%;
                 height: 100%;
             }
-
-
 
             .event {
                 fill-opacity: 0.75;
@@ -69,59 +67,41 @@
 
         <div class="container-fluid py-md-2 toolbar position-sticky">
             <div class="row">
-
-
-
                 <div class="btn-toolbar justify-content-center align-items-center" role="toolbar" aria-label="Toolbar with button groups">
 
-                    <!-- <span class="shotTrackerInfo d-none">Mode</span>
 
-                    <div class="btn-group m-1" role="group" aria-label="Add or Remove">
-                        <button class="btn btn-hornets" id="modeBtn">Add</button>
-                    </div> -->
-
-
-
-                    <!-- <span class="shotTrackerInfo d-none">Delete all points</span>
-
-                    <button id="clearButton" class="btn btn-secondary">Clear All</button> -->
-
-
-                    <!-- addGroup -->
-                    <!-- removeGroup -->
-
-
-                    <span class="shotTrackerInfo d-none">Period</span>
+                    <span class="toolbarLabel d-none">Period</span>
 
                     <div class="btn-group m-1" role="group" aria-label="Period (radio toggle button group)">
 
-                        <input type="radio" class="btn-check btn-period" name="periodBtn" id="periodBtn1" autocomplete="off" checked>
+                        <input type="radio" class="btn-check btn-period" name="periodBtn" id="periodBtn1" data-period="1" autocomplete="off" checked>
                         <label class="btn btn-outline-hornets" for="periodBtn1">1</label>
 
-                        <input type="radio" class="btn-check btn-period" name="periodBtn" id="periodBtn2" autocomplete="off">
+                        <input type="radio" class="btn-check btn-period" name="periodBtn" id="periodBtn2" data-period="2" autocomplete="off">
                         <label class="btn btn-outline-hornets" for="periodBtn2">2</label>
 
-                        <input type="radio" class="btn-check btn-period" name="periodBtn" id="periodBtn3" autocomplete="off">
+                        <input type="radio" class="btn-check btn-period" name="periodBtn" id="periodBtn3" data-period="3" autocomplete="off">
                         <label class="btn btn-outline-hornets" for="periodBtn3">3</label>
 
-                        <input type="radio" class="btn-check btn-period" name="periodBtn" id="periodBtn4" autocomplete="off">
+                        <input type="radio" class="btn-check btn-period" name="periodBtn" id="periodBtn4" data-period="4" autocomplete="off">
                         <label class="btn btn-outline-hornets" for="periodBtn4">4</label>
                     </div>
 
-                    <span class="shotTrackerInfo d-none">Points</span>
+
+                    <span class="toolbarLabel d-none">Points</span>
 
                     <div class="btn-group m-1" role="group" aria-label="Points (radio toggle button group)">
 
-                        <input type="radio" class="btn-check btn-points" name="pointsBtn" id="pointsBtn0" autocomplete="off">
+                        <input type="radio" class="btn-check btn-points" name="pointsBtn" id="pointsBtn0" data-point="0" autocomplete="off">
                         <label class="btn btn-outline-danger" for="pointsBtn0">0</label>
 
-                        <!-- <input type="radio" class="btn-check btn-points" name="pointsBtn" id="pointsBtn1" autocomplete="off">
+                        <!-- <input type="radio" class="btn-check btn-points" name="pointsBtn" id="pointsBtn1" data-point="1" autocomplete="off">
                         <label class="btn btn-outline-warning" for="pointsBtn1">1</label> -->
 
-                        <input type="radio" class="btn-check btn-points" name="pointsBtn" id="pointsBtn2" autocomplete="off" checked>
+                        <input type="radio" class="btn-check btn-points" name="pointsBtn" id="pointsBtn2" data-point="2" autocomplete="off" checked>
                         <label class="btn btn-outline-primary" for="pointsBtn2">2</label>
 
-                        <input type="radio" class="btn-check btn-points" name="pointsBtn" id="pointsBtn3" autocomplete="off">
+                        <input type="radio" class="btn-check btn-points" name="pointsBtn" id="pointsBtn3" data-point="3" autocomplete="off">
                         <label class="btn btn-outline-success" for="pointsBtn3">3</label>
                     </div>
 
@@ -168,47 +148,21 @@
 
                             <li><a class="dropdown-item" data-shot="5" href="#">
                                     remove</a></li>
+
+                            <li><a class="dropdown-item" id="clearButton" data-shot="6" href="#">
+                                    Clear All</a></li>
+
+
                         </ul>
                     </div>
 
-
-
-                    <span id="shotTrackerInfoBtn" class="m-1 me-2">
+                    <span id="toolbarLabelsBtn" class="m-1 me-2">
                         <i class="bi bi-info-circle"></i>
                     </span>
 
                 </div>
-
             </div>
         </div>
-
-        <style>
-            #clickMap {
-                background-color: rgba(255, 0, 0, .5);
-                position: relative;
-                width: 100%;
-            }
-
-            #svgBgImage {
-                width: 100%;
-                height: auto;
-                user-select: none;
-            }
-
-            #svgDiv {
-                /* background-color: rgba(0,255,0,.5); */
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100%;
-                width: 100%;
-            }
-
-            #svgDiv svg {
-                /* background-color: rgba(0,0,255,.5); */
-                min-height: 80%;
-            }
-        </style>
 
         <div id="clickMap">
             <img id="svgBgImage" src="./assets/img/halfcourt-cropped.png" alt='basketball court' draggable="false" />
@@ -220,8 +174,6 @@
                 </svg>
             </div>
         </div>
-
-
 
         <footer class="container-fluid hornets-purple-bg white">
             <div class="container py-5">

@@ -1,20 +1,9 @@
 "use strict";
 
-// let toolbar = document.querySelector(".toolbar");
+// ELEMENTS
+let svg;
 
-// document.addEventListener("DOMContentLoaded", function () {
-// 	window.addEventListener("scroll", function () {
-// 		if (window.scrollY > 50) {
-// 			toolbar.classList.add("fixed-top");
-
-// 			toolbar.style.backgroundColor = "rgba(255,255,255,0.5)";
-// 		} else {
-// 			toolbar.classList.remove("fixed-top");
-// 			toolbar.style.backgroundColor = "rgba(255,255,255,1)";
-// 		}
-// 	});
-// });
-
+// PROPS
 let mode = "Add";
 
 // PERIOD
@@ -34,6 +23,7 @@ const shotTypes = [
 	"runner/floater",
 	"post move",
 	"remove",
+	"remove all",
 ];
 let shotType = shotTypes[0];
 
@@ -47,92 +37,73 @@ const shapeSize = 10;
 
 let shotsPlaced = [];
 
-function report() {
-	console.log(
-		`mode=${mode} | period=${periodType} | point=${pointType} | shot=${shotType}`
-	);
+/****************************************************/
+/******************* INTERFACE **********************/
+/****************************************************/
+
+let shotTypeBtn,
+	shotTypeItems,
+	toolbarLabels,
+	toolbarLabelsVisible = false;
+
+
+function displaySelectedShotType(text, shotTypeNum){
+    shotTypeBtn.innerHTML = text;
+	shotTypeBtn.value = shotTypeNum;
 }
 
-// bootstrap dropdown with buttons
-let selectorBtn = document.querySelector(".dropdown-toggle");
-let items = document.querySelectorAll(".dropdown-item");
-items.forEach((item) => {
-	if (item.dataset.shot == "0") {
-		selectorBtn.innerHTML = item.innerHTML;
-		selectorBtn.value = item.dataset.shot;
-	}
-	item.addEventListener("click", function () {
-		selectorBtn.innerHTML = item.innerHTML;
-		selectorBtn.value = item.dataset.shot;
-		let shotTypeIndex = Number(item.dataset.shot);
-		shotType = shotTypes[shotTypeIndex];
-		// console.log(`innerHTML: ${selectorBtn.innerHTML}, type: ${selectorBtn.type}`);
+
+async function createToolbar() {
+	// SHOT TYPE
+	shotTypeBtn = document.querySelector(".dropdown-toggle");
+	shotTypeItems = document.querySelectorAll(".dropdown-item");
+	// show the value in the button
+	shotTypeItems.forEach((item) => {
+        // set the default
+		if (item.dataset.shot == "0") displaySelectedShotType(item.innerHTML, item.dataset.shot);
+        // add button listeners
+		item.addEventListener("click", function () {
+			displaySelectedShotType(item.innerHTML, item.dataset.shot);
+			shotType = shotTypes[Number(item.dataset.shot)];
+			// console.log(`value: ${shotTypeBtn.value}, shotType: ${shotType}`);
+		});
 	});
-});
 
-let infoVisible = false;
-const shotTrackerInfo = document.querySelectorAll(".shotTrackerInfo");
-document.querySelector("#shotTrackerInfoBtn").addEventListener("click", () => {
-	if (infoVisible) {
-		infoVisible = false;
-		shotTrackerInfo.forEach((item) => {
-			item.classList.add("d-none");
+	// SHOW / HIDE LABELS
+	toolbarLabelsVisible = false;
+	toolbarLabels = document.querySelectorAll(".toolbarLabel");
+	document
+		.querySelector("#toolbarLabelsBtn")
+		.addEventListener("click", () => {
+			if (toolbarLabelsVisible) {
+				toolbarLabelsVisible = false;
+				toolbarLabels.forEach((item) => {
+					item.classList.add("d-none");
+				});
+			} else {
+				toolbarLabelsVisible = true;
+				toolbarLabels.forEach((item) => {
+					item.classList.remove("d-none");
+				});
+			}
 		});
-	} else {
-		infoVisible = true;
-		shotTrackerInfo.forEach((item) => {
-			item.classList.remove("d-none");
-		});
-	}
-});
-
-createClickMap();
-addListeners();
-
-let addGroup = document.querySelector(".addGroup");
-let removeGroup = document.querySelector(".removeGroup");
-
-function addListeners() {
-	// Mode btn
-	// document.querySelector("#modeBtn").addEventListener("click", (e) => {
-	// 	if (e.target.innerHTML == "Add") {
-	// 		mode = "Remove";
-	// 		addGroup.style.display = "none";
-	// 		removeGroup.style.display = "block";
-	// 	} else {
-	// 		mode = "Add";
-	// 		addGroup.style.display = "block";
-	// 		removeGroup.style.display = "none";
-	// 	}
-	// 	e.target.innerHTML = mode;
-	// 	report();
-	// });
 
 	// Radio buttons for periodTypes
-	const periodBtns = d3
-		.selectAll(".btn-period")
-		.on("click", (d, i) => {
-			periodType = i;
-			report();
-		})
-		.data(periodTypes)
-		.enter();
+	document.querySelectorAll(".btn-period").forEach((btn) => {
+		btn.addEventListener("click", () => {
+			periodType = btn.dataset.period;
+		});
+	});
 
 	// Radio buttons for pointType
-	const pointsBtns = d3
-		.selectAll(".btn-points")
-		.on("click", (d, i) => {
-			pointType = i;
-			report();
-		})
-		.data(pointTypes)
-		.enter();
+	document.querySelectorAll(".btn-points").forEach((btn) => {
+		btn.addEventListener("click", () => {
+			pointType = btn.dataset.point;
+		});
+	});
 }
 
-// const svg = d3.select("#clickMap").select("svg");
-// const zoomGroup = svg.select("#zoomGroup");
-
-function createClickMap() {
+async function createClickMap() {
 	d3.select("#clickMap")
 		.select("img")
 		.on("click", () => {
@@ -140,21 +111,19 @@ function createClickMap() {
 		});
 
 	// Select the svg element
-	const svg = d3.select("#clickMap").select("svg");
+	svg = d3.select("#clickMap").select("svg");
 
 	// Receive click events from background
-	svg.on("click", function (e) {
-		if (shotType === "remove") return;
+	svg.on("click", function (pointerEvent) {
+		if (shotType === "remove" || shotType === "remove all") return;
+		// console.log(pointerEvent);
 
-		// Get the width and height
-		const width = parseInt(svg.style("width"), 10);
-		const height = parseInt(svg.style("height"), 10);
-
-		const x = d3.pointer(e)[0];
-		const y = d3.pointer(e)[1];
+		updateSvgSize();
+		const x = d3.pointer(pointerEvent)[0];
+		const y = d3.pointer(pointerEvent)[1];
 
 		// Set the data for this event
-		const data = {
+		const shotData = {
 			periodType: periodType,
 			pointType: pointType,
 			shotType: shotType,
@@ -164,39 +133,28 @@ function createClickMap() {
 			y: y,
 		};
 
-		shotsPlaced.push(data);
+		shotsPlaced.push(shotData);
 		storage.setItem("shotsPlaced", shotsPlaced);
-		console.log(shotsPlaced);
+		// console.log(shotsPlaced);
 
-		// Draw the event
-		const g = svg
-			.append("g")
-			.datum(data)
-			.attr("class", "event")
-			.attr("transform", (d) => {
-				console.log(d);
-				return "translate(" + d.x + "," + d.y + ")";
-			})
-			.on("click", function (e) {
-				if (shotType === "remove") {
-					e.stopPropagation();
-					d3.select(this).remove();
-					return;
-				}
-			});
-
-		g.append("path")
-			.attr("d", (d) => getShape(d.shotType)())
-			// .style("fill", (d) => eventColor(d.pointType));
-			.style("fill", (d) => "#" + pointColors[d.pointType]);
+		addShot(shotData);
 	});
+}
 
+// Remove all shots button
+document.querySelector("#clearButton").addEventListener("click", () => {
+	if (confirm("Remove all shots?") == true) {
+		d3.select("#clickMap").selectAll(".event").remove();
+		shotsPlaced = [];
+		storage.setItem("shotsPlaced", shotsPlaced);
+	}
+    
+});
+
+async function addResizeObserver() {
 	// Handle resizing svg div
 	const resizeObserver = new ResizeObserver((entries) => {
-		// Get the width and height
-		const width = parseInt(svg.style("width"), 10);
-		const height = parseInt(svg.style("height"), 10);
-
+		updateSvgSize();
 		d3.select("#clickMap")
 			.selectAll(".event")
 			.each(function (d) {
@@ -209,54 +167,60 @@ function createClickMap() {
 				);
 			});
 	});
-
 	resizeObserver.observe(document.querySelector("#svgDiv"));
+}
 
-	// /**
-	//  * https://stackoverflow.com/a/52132259/441878
-	//  */
+async function updateFromLocalStorage() {
+	// check for values in localStorage
+	shotsPlaced = storage.getItem("shotsPlaced") || [];
 
-	// create and apply zoom behavior
-	// svg.call(d3.zoom().on("zoom", handleZoom)).on("wheel.zoom", wheeled);
+	if (shotsPlaced.length > 0) {
+		shotsPlaced.forEach(function (d) {
+			addShot({
+				periodType: d.periodType,
+				pointType: d.pointType,
+				shotType: d.shotType,
+				xNorm: d.xNorm,
+				yNorm: d.yNorm,
+				x: d.x,
+				y: d.y,
+			});
+		});
+	}
+}
 
-	// let transform = d3.zoomTransform(svg);
-	// // transform.x += 10;
-	// // transform.y += 10;
-	// svg.attr("transform", transform);
+let width, height;
 
-	// function handleZoom(e) {
-	// 	console.log("e", e);
-	// 	svg.attr("transform", e.transform);
-	// }
+// Get the width and height
+function updateSvgSize() {
+	width = parseInt(svg.style("width"), 10);
+	height = parseInt(svg.style("height"), 10);
+}
 
-	// // function handleZoom() {
-	// // 	let current_transform = d3.zoomTransform(svg);
-	// // 	current_transform.x += d3.event.sourceEvent.movementX;
-	// // 	current_transform.y += d3.event.sourceEvent.movementY;
-	// //     console.log("current_transform",current_transform)
-	// // 	svg.attr("transform", current_transform);
-	// // }
+function addShot(shotData) {
+	// console.log(shotData);
 
-	// function wheeled() {
-	// 	let current_transform = d3.zoomTransform(svg);
-	// 	console.log("current_transform", current_transform);
+	// Draw the event
+	const g = svg
+		.append("g")
+		.datum(shotData)
+		.attr("class", "event")
+		.attr("transform", (d) => {
+			console.log(d);
+			return "translate(" + d.x + "," + d.y + ")";
+		})
+		// add remove listener to each shot
+		.on("click", function (e) {
+			if (shotType === "remove") {
+				e.stopPropagation();
+				d3.select(this).remove();
+				return;
+			}
+		});
 
-	// 	if (d3.event.ctrlKey) {
-	// 		current_transform.k = current_transform.k - d3.event.deltaY * 0.01;
-	// 	} else {
-	// 		current_transform.y = current_transform.y - d3.event.deltaY;
-	// 	}
-	// 	svg.attr("transform", current_transform);
-	// }
-
-	// svg.call(d3.zoom()
-	//     .extent([[0, 0], [600, 600]])
-	//     .scaleExtent([1, 8])
-	//     .on("zoom", zoomed));
-
-	// function zoomed({transform}) {
-	//     svg.attr("transform", transform);
-	// }
+	g.append("path")
+		.attr("d", (d) => getShape(d.shotType)())
+		.style("fill", (d) => "#" + pointColors[d.pointType]);
 }
 
 function getShape(shotType) {
@@ -266,9 +230,30 @@ function getShape(shotType) {
 		.size(shapeSize * shapeSize);
 }
 
-// Clear button
-d3.select("#clearButton").on("click", () => {
-	d3.select("#clickMap").selectAll(".event").remove();
-	shotsPlaced = [];
-	storage.setItem("shotsPlaced", shotsPlaced);
-});
+/****************************************************/
+/********************** INIT ************************/
+/****************************************************/
+
+document.addEventListener("DOMContentLoaded", init);
+
+async function init() {
+	await createToolbar();
+	await createClickMap();
+	// addScrollListener();
+	await addResizeObserver();
+	await updateFromLocalStorage();
+}
+
+// let toolbar = document.querySelector(".toolbar");
+
+// function addScrollListener() {
+// 	window.addEventListener("scroll", function () {
+// 		if (window.scrollY > 50) {
+// 			toolbar.classList.add("fixed-top");
+// 			toolbar.style.backgroundColor = "rgba(255,255,255,0.5)";
+// 		} else {
+// 			toolbar.classList.remove("fixed-top");
+// 			toolbar.style.backgroundColor = "rgba(255,255,255,1)";
+// 		}
+// 	});
+// }
