@@ -68,9 +68,9 @@ function updateTable() {
 	nodes.tossCountLg.value = tossSummary.tossCount || 0;
 	// nodes.tossCount.innerHTML = tossSummary.tossCount || 0;
 	nodes.tossEventsEstimate1000.innerHTML =
-		tossSummary.tossEventsEstimate1000 || 0;
+		Math.ceil(tossSummary.tossEventsEstimate1000) || 0;
 	nodes.tossEventsEstimateAttendance.innerHTML =
-		tossSummary.tossEventsEstimateAttendance || 0;
+		Math.ceil(tossSummary.tossEventsEstimateAttendance) || 0;
 	nodes.gameAttendance.value = tossSummary.gameAttendance || 1;
 }
 
